@@ -80,8 +80,20 @@ class PoliticalParties {
     }
     leaderboard() {
         const sortedResult = filepaths.readFilePath();
-        sortedResult.sort((a, b) =>  b.vote_count - a.vote_count);
+
+        for (let i = 0; i < sortedResult.length; i++) {
+            for (let j = 0; j < sortedResult.length - 1 - i; j++) {
+                if (sortedResult[j].vote_count < sortedResult[j + 1].vote_count) {
+                    let temp_object = sortedResult[j + 1];
+                    sortedResult[j + 1] = sortedResult[j]; 
+                    sortedResult[j] = temp_object;
+                }
+            }
+    
+        }
         return sortedResult;
+        // sortedResult.sort((a, b) =>  b.vote_count - a.vote_count);
+        // return sortedResult;
     }
 }
 
